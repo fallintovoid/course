@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', ()=>{
-    //bet tabs
+    // Consts
     const container = document.querySelector('.main_block');
 
     let betList = [
@@ -35,6 +35,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         return Math.floor(Math.random() * max);
     }
 
+    // Render functions
+
     function removeItems(){
         const betItems = document.querySelectorAll('.bet_item');
         betItems.forEach(item => {
@@ -53,6 +55,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
             item.colorOne,
             item.colorTwo).render());
     }
+
+    // New bet
 
     class Bettab{
         constructor(teamOne, teamTwo, coOne, coTwo, index, colorOne, colorTwo){
@@ -114,7 +118,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
             teamOne.style.background = this.colorOne;
             teamTwo.style.background = this.colorTwo;
-            //click 
+            // Event listeners 
 
             elem.addEventListener('click', (e)=>{
                 const ev = e.target;
@@ -133,7 +137,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 } else if (ev.classList.contains('bet_team_one_butt')){
                     if (teamOneIn.value != ''){
                         const teamOneNumb = +teamOneIn.value;
-                        if (teamOneNumb > 0){
+                        if (teamOneNumb > 0 && teamOneNumb <= userMoney){
                             setTimeout(()=>{
                                 let numb = Math.floor(teamOneIn.value * this.coOne);
                                 if (getRandomInt(2) === 1){
@@ -161,7 +165,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 } else if (ev.classList.contains('bet_team_two_butt')){
                     if (teamTwoIn.value != ''){
                         const teamTwoNumb = +teamTwoIn.value;
-                        if (teamTwoNumb > 0){
+                        if (teamTwoNumb > 0 && teamTwoNumb <= userMoney){
                             setTimeout(()=>{
                                 let numb = Math.floor(teamTwoIn.value * this.coTwo);
                                 if (getRandomInt(2) === 1){
@@ -193,13 +197,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     }
 
-    renderBets(betList);
-    // win/lose tab 
+    renderBets(betList); 
     
     function deleteItem(ind){
         betList = betList.filter(item => item.index != ind);
         renderBets(betList);
     }
+
+    // Win/lose tab
 
     function showWinTab(color, amount = 0){
         const winTab = document.querySelector('.win_tab');
@@ -230,7 +235,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }, 3000);
     }
 
-    //window tab
+    // Window tab
 
     const addTab = document.querySelector('.add_tab'),
           plus = document.querySelector('.plus'),
@@ -266,6 +271,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
             inCoTwo.value = '';
         }
     });
+
+    // Colors
     function getFirstColor(){
         return colorList[getRandomInt(colorList.length)];
     }
@@ -277,6 +284,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
             getOtherColor();
         }
     };
+
+    // New object
 
     class Betobj{
         constructor(team1, team2, co1, co2){
@@ -293,10 +302,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     }
 
+    // Conditions for rendering new object
+
     addButton.addEventListener('click', ()=>{
         if (inTeamOne.value && inTeamTwo.value && inCoOne.value && inCoTwo.value){
             if (inCoOne.value.toLowerCase() !== inCoOne.value.toUpperCase() ||
-            inCoTwo.value.toLowerCase() !== inCoTwo.value.toUpperCase()){
+            inCoTwo.value.toLowerCase() !== inCoTwo.value.toUpperCase() ||
+            inCoTwo.value.includes(',') ||
+            inCoOne.value.includes(',')){
                 showWinTab('nan');
                 inCoOne.value = '';
                 inCoTwo.value = '';
