@@ -109,41 +109,57 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     }
                 } else if (ev.classList.contains('bet_team_one_butt')){
                     if (teamOneIn.value != ''){
-                        setTimeout(()=>{
-                            let numb = Math.floor(teamOneIn.value * this.coOne);
-                            if (getRandomInt(2) === 1){
-                                userMoney += numb;
-                                userMoneyHTML.innerHTML = userMoney;
-                                showWinTab('win', numb);
-                            } else {
-                                userMoney -= teamOneIn.value;
-                                userMoneyHTML.innerHTML = userMoney;
-                                showWinTab('lose', teamOneIn.value);
-                            }
+                        const teamOneNumb = +teamOneIn.value;
+                        if (teamOneNumb > 0){
+                            setTimeout(()=>{
+                                let numb = Math.floor(teamOneIn.value * this.coOne);
+                                if (getRandomInt(2) === 1){
+                                    userMoney += numb;
+                                    userMoneyHTML.innerHTML = userMoney;
+                                    showWinTab('win', numb);
+                                } else {
+                                    userMoney -= teamOneIn.value;
+                                    userMoneyHTML.innerHTML = userMoney;
+                                    showWinTab('lose', teamOneIn.value);
+                                }
+                                teamOneIn.value = '';
+                                deleteItem(this.index);
+                            }, 3000);
+                        } else {
                             teamOneIn.value = '';
-                            deleteItem(this.index);
-                        }, 3000);
+                            showWinTab('no');
+                        }
+                        
                     } else {
+                        teamOneIn.value = '';
                         showWinTab('no');
                     }
                     teamOne.classList.remove('active');
                 } else if (ev.classList.contains('bet_team_two_butt')){
                     if (teamTwoIn.value != ''){
-                        setTimeout(()=>{
-                            let numb = Math.floor(teamTwoIn.value * this.coTwo);
-                            if (getRandomInt(2) === 1){
-                                userMoney += numb;
-                                userMoneyHTML.innerHTML = userMoney;
-                                showWinTab('win', numb);
-                            } else {
-                                userMoney -= teamTwoIn.value;
-                                userMoneyHTML.innerHTML = userMoney;
-                                showWinTab('lose', teamTwoIn.value);
-                            }
+                        const teamTwoNumb = +teamTwoIn.value;
+                        if (teamTwoNumb > 0){
+                            setTimeout(()=>{
+                                let numb = Math.floor(teamTwoIn.value * this.coTwo);
+                                if (getRandomInt(2) === 1){
+                                    userMoney += numb;
+                                    userMoneyHTML.innerHTML = userMoney;
+                                    showWinTab('win', numb);
+                                } else {
+                                    userMoney -= teamTwoIn.value;
+                                    userMoneyHTML.innerHTML = userMoney;
+                                    showWinTab('lose', teamTwoIn.value);
+                                }
+                                teamTwoIn.value = '';
+                                deleteItem(this.index);
+                            }, 3000);
+                        } else {
                             teamTwoIn.value = '';
-                            deleteItem(this.index);
-                        }, 3000);
+                            showWinTab('no');
+                        }
+                        
                     } else {
+                        teamTwoIn.value = '';
                         showWinTab('no');
                     }
                     teamTwo.classList.remove('active');
@@ -177,7 +193,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         } else if (color === 'no'){
             winTab.style.background = 'linear-gradient( 135deg, #FDD819 10%, #E80505 100%)';
             winTab.innerHTML = `
-                <div class="win_text">Fill the gaps!</div>
+                <div class="win_text">Error!</div>
             `;
         } else if (color === 'nan'){
             winTab.style.background = 'linear-gradient( 135deg, #FDD819 10%, #E80505 100%)';
