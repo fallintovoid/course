@@ -8,8 +8,23 @@ document.addEventListener('DOMContentLoaded', ()=>{
             teamTwo: 'TEAM 2',
             coOne: 1,
             coTwo: 1.5,
-            index: 0
+            index: 0,
+            colorOne: '#ffbd64',
+            colorTwo: '#0396FF'
         }
+    ];
+    const colorList = [
+        '#ffbd64',
+        '#ffe564',
+        '#afff64',
+        '#64ffaf',
+        '#0396FF',
+        '#28C76F',
+        '#64b6ff',
+        '#bea0ff',
+        '#dfa0ff',
+        '#ffa0ab',
+        '#b1ffa0'
     ];
     let userMoney = 6000;
 
@@ -34,16 +49,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
             item.teamTwo,
             item.coOne,
             item.coTwo,
-            item.index).render());
+            item.index,
+            item.colorOne,
+            item.colorTwo).render());
     }
 
     class Bettab{
-        constructor(teamOne, teamTwo, coOne, coTwo, index){
+        constructor(teamOne, teamTwo, coOne, coTwo, index, colorOne, colorTwo){
             this.teamOne = teamOne;
             this.teamTwo = teamTwo;
             this.coOne = coOne;
             this.coTwo = coTwo;
             this.index = index;
+            this.colorOne = colorOne;
+            this.colorTwo = colorTwo;
         }
         render(){
             const elem = document.createElement('div');
@@ -82,6 +101,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 
                     
             `; 
+
             elem.classList.add('bet_item');
             container.append(elem);
         
@@ -91,6 +111,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
             const teamTwo = elem.querySelector('.bet_team_two');
             const teamOneIn = elem.querySelector('.bet_team_one_in');
             const teamTwoIn = elem.querySelector('.bet_team_two_in');
+
+            teamOne.style.background = this.colorOne;
+            teamTwo.style.background = this.colorTwo;
             //click 
 
             elem.addEventListener('click', (e)=>{
@@ -243,6 +266,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
             inCoTwo.value = '';
         }
     });
+    function getFirstColor(){
+        return colorList[getRandomInt(colorList.length)];
+    }
+    function getOtherColor(){
+        const newColor = colorList[getRandomInt(colorList.length)];
+        if (newColor !== getFirstColor()){
+            return newColor; 
+        } else {
+            getOtherColor();
+        }
+    };
 
     class Betobj{
         constructor(team1, team2, co1, co2){
@@ -251,6 +285,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
             this.coOne = co1;
             this.coTwo = co2;
             this.index = betList.length;
+            this.colorOne = getFirstColor();
+            this.colorTwo = getOtherColor();
         }
         push(){
             betList.push(this);
@@ -259,7 +295,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     addButton.addEventListener('click', ()=>{
         if (inTeamOne.value && inTeamTwo.value && inCoOne.value && inCoTwo.value){
-            console.log(typeof +inCoOne.value);
             if (inCoOne.value.toLowerCase() !== inCoOne.value.toUpperCase() ||
             inCoTwo.value.toLowerCase() !== inCoTwo.value.toUpperCase()){
                 showWinTab('nan');
