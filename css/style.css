@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
 
 *{
   margin: 0;
@@ -312,23 +313,24 @@ footer{
 .win_tab{
   display: flex;
   position: fixed;
-  width: 300px;
-  height: 150px;
+  width: 200px;
+  height: 70px;
   /* background-color: #000DFF; */
   z-index: 10000;
-  transform: translateX(400px);
+  transform: translateX(210px);
   transition: 0.3s ease;
   border-radius: 15px;
   justify-content: center;
   align-items: center;
   color: white;
-  font-family: 'Lato', sans-serif;
-  font-size: 2rem;
-  top: calc(100vh - 200px);
-  left: calc(100vw - 400px);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 400;
+  top: calc(100vh - 80px);
+  left: calc(100vw - 210px);
 }
 .animated{
-  transform: translateX(80px);
+  transform: translateX(0);
 }
 
 

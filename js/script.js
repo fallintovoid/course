@@ -209,22 +209,22 @@ document.addEventListener('DOMContentLoaded', ()=>{
     function showWinTab(color, amount = 0){
         const winTab = document.querySelector('.win_tab');
         if (color === 'win'){
-            winTab.style.background = "linear-gradient( 135deg, #81FBB8 10%, #28C76F 100%)";
+            winTab.style.background = "linear-gradient(90deg, rgba(16,217,178,1) 0%, rgba(88,195,81,1) 100%)";
             winTab.innerHTML = `
                 <div class="win_text">You won! +${amount}</div>
             `;
         } else if (color === 'lose'){
-            winTab.style.background = 'linear-gradient( 135deg, #FDD819 10%, #E80505 100%)';
+            winTab.style.background = 'linear-gradient(90deg, rgba(250,126,92,1) 0%, rgba(251,140,90,1) 100%)';
             winTab.innerHTML = `
                 <div class="win_text">You lose! -${amount}</div>
             `;
         } else if (color === 'no'){
-            winTab.style.background = 'linear-gradient( 135deg, #FDD819 10%, #E80505 100%)';
+            winTab.style.background = 'linear-gradient(90deg, rgba(250,126,92,1) 0%, rgba(251,140,90,1) 100%)';
             winTab.innerHTML = `
                 <div class="win_text">Error!</div>
             `;
         } else if (color === 'nan'){
-            winTab.style.background = 'linear-gradient( 135deg, #FDD819 10%, #E80505 100%)';
+            winTab.style.background = 'linear-gradient(90deg, rgba(250,126,92,1) 0%, rgba(251,140,90,1) 100%)';
             winTab.innerHTML = `
                 <div class="win_text">Not a number!</div>
             `;
@@ -337,5 +337,4 @@ document.addEventListener('DOMContentLoaded', ()=>{
        
         
     });
-    // ABOBA
 });
