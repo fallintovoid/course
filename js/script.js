@@ -276,14 +276,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
     function getFirstColor(){
         return colorList[getRandomInt(colorList.length)];
     }
-    function getOtherColor(){
+    function getOtherColor(colorOneTeam){
         const newColor = colorList[getRandomInt(colorList.length)];
-        if (newColor !== getFirstColor()){
+        if (colorOneTeam !== newColor){
             return newColor; 
         } else {
-            getOtherColor();
+            getOtherColor(colorOneTeam);
         }
-    };
+    }
 
     // New object
 
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             this.coTwo = co2;
             this.index = betList.length;
             this.colorOne = getFirstColor();
-            this.colorTwo = getOtherColor();
+            this.colorTwo = getOtherColor(this.colorOne);
         }
         push(){
             betList.push(this);
